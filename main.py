@@ -6,6 +6,7 @@
 import pygame as pg
 from camera import *
 from projection import *
+
 from Object3D import *
 
 
@@ -22,26 +23,24 @@ class Renderer:
         self.object.rotate_X(180)
 
     def create_obj(self):
-        self.camera= Camera(self,[-0.65646274,2.00236745,-3.4492734])
+        self.camera = Camera(self, [-0.65646274, 2.00236745, -3.4492734])
         self.projection = Projection(self)
-        self.object =  self.get_object_from_file("my_potato_face.obj")
+        self.object = self.get_object_from_file("my_potato_face.obj")
 
-    def get_object_from_file(self,filepath):
-        vertex,faces = [],[]
+    def get_object_from_file(self, filepath):
+        vertex, faces = [], []
         with open(filepath) as f:
             for line in f:
                 if line.startswith('v '):
-                    vertex.append([float(i) for i in line.split()[1:]]+[1])
+                    vertex.append([float(i) for i in line.split()[1:]] + [1])
                 elif line.startswith('f'):
                     faces_ = line.split()[1:]
-                    faces.append([int(face_.split('/')[0])-1 for face_ in faces_])
-        return Object3D(self,vertex,faces)
-
+                    faces.append([int(face_.split('/')[0]) - 1 for face_ in faces_])
+        return Object3D(self, vertex, faces)
 
     def draw(self):
-       self.screen.fill(pg.Color("black"))
-       self.object.draw()
-
+        self.screen.fill(pg.Color("black"))
+        self.object.draw()
 
     def run(self):
 
@@ -56,8 +55,6 @@ class Renderer:
             pg.display.flip()
             self.clock.tick(self.FPS)
             print(self.camera.pos)
-
-
 
 
 if __name__ == '__main__':

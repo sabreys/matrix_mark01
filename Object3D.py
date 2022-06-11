@@ -7,7 +7,7 @@ from numba import njit
 
 @njit(fastmath=True)
 def any_func(arr, a, b):
-    return np.any((arr == a) | (arr == b)) #fps improvement
+    return np.any((arr == a) | (arr == b))  # fps improvement
 
 
 class Object3D:
